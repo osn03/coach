@@ -2,7 +2,7 @@
 
 A world-class endurance coaching **skill** for agentic AI tools (Claude Code, and likely other MCP-capable agents) — swimming, cycling, running, and triathlon. It manages long-term athlete development the way a real coach + sports nutritionist would: periodized training plans, readiness-guided daily adjustments, evidence-tiered methods, written race plans with individualized tapers, and a nutrition engine that writes daily calorie/macro targets straight onto your Intervals.icu calendar.
 
-Intervals.icu is the source of truth; Strava/Garmin/Wahoo data arrives natively through Intervals.icu's own device sync.
+Intervals.icu is the source of truth; connect your devices (Garmin, Wahoo, Coros, etc.) to it directly.
 
 ## What it does
 
@@ -13,15 +13,15 @@ Intervals.icu is the source of truth; Strava/Garmin/Wahoo data arrives natively 
 - **Nutrition as a core function, on by default** — daily calorie and macro targets computed from your actual training load and written to your Intervals.icu calendar automatically (as dated "Nutrition Target" notes).
 - **Persistent athlete memory** — the skill maintains a structured history (`~/.training/`) across sessions: profile, race calendar, injuries, nutrition history, decision log, and versioned plans, so every coaching call is grounded in your own data, not a fresh guess each time.
 
-## What this repo does NOT include
+## The Intervals.icu MCP server
 
-**The Intervals.icu MCP server is a separate open-source project and is not vendored here.** This skill targets a fork of [mvilanova/intervals-mcp-server](https://github.com/mvilanova/intervals-mcp-server) that adds the write tools the coach needs (`update_wellness`, `update_sport_settings`, `add_nutrition_targets`, and a RACE category on events). All credit for the original server goes to its author. See `AGENT.md` for setup. The server is GPL-3.0; running your own modified copy privately is unrestricted, and publishing a modified copy requires releasing it under GPL-3.0.
+**The Intervals.icu MCP server is included in this repo** under `../intervals-mcp-server`. It is a fork of [mvilanova/intervals-mcp-server](https://github.com/mvilanova/intervals-mcp-server) that adds the write tools the coach needs (`update_wellness`, `update_sport_settings`, `add_nutrition_targets`, and a RACE category on events). All credit for the original server goes to its author. See `AGENT.md` for setup. The server is GPL-3.0; running your own modified copy privately is unrestricted, and publishing a modified copy requires releasing it under GPL-3.0.
 
-Strava is not a separate integration here — Intervals.icu already ingests Strava/Garmin/Wahoo activities via its own sync.
+**Strava:** activities that reach Intervals.icu only via Strava are not readable through its API (Strava's API terms), so the coach can't see them. Connect Garmin/Wahoo/Coros/etc. to Intervals.icu directly.
 
 ## Setup
 
-The fastest path: point an agentic coding assistant (Claude Code or similar) at **[`AGENT.md`](./AGENT.md)** and ask it to read the file and set everything up. It will:
+The fastest path: run `setup.ps1` (Windows) or `setup.sh` (macOS/Linux) from the repo root; see the root README. Alternatively, point an agentic coding assistant (Claude Code or similar) at **[`AGENT.md`](./AGENT.md)** and ask it to read the file and set everything up. It will:
 
 1. Clone and install the Intervals.icu MCP server (the forked one)
 2. Walk you through configuring the Intervals.icu API key + athlete ID in the server's .env (never typed into chat)
@@ -35,7 +35,7 @@ The fastest path: point an agentic coding assistant (Claude Code or similar) at 
 
 - An agentic AI coding tool with MCP support (Claude Code, etc.) — a $20/mo tier subscription is generally sufficient.
 - An [Intervals.icu](https://intervals.icu/) account (free tier is fine) plus a personal API key and your athlete ID (from Settings → Developer, and your profile URL).
-- Python 3.10+ and [`uv`](https://docs.astral.sh/uv/) (installed automatically if missing — see `AGENT.md`).
+- [`uv`](https://docs.astral.sh/uv/). The setup script installs it, and uv fetches Python 3.12 automatically.
 
 ## A note on data privacy
 

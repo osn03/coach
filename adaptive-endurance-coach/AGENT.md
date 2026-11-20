@@ -18,9 +18,9 @@ adaptive-endurance-coach/
       nutrition.md
 ```
 
-This is a coaching **skill** for swimming, cycling, running, and triathlon. **Intervals.icu is the source of truth.** Strava/Garmin/Wahoo data flows into Intervals.icu through its own device sync, so there is no separate Strava connector to configure. The skill includes a nutrition engine that writes daily calorie/macro targets to the Intervals.icu calendar automatically (as dated "Nutrition Target" notes).
+This is a coaching **skill** for swimming, cycling, running, and triathlon. **Intervals.icu is the source of truth.** Devices (Garmin, Wahoo, Coros, etc.) must be connected to Intervals.icu **directly**: activities imported via Strava are not readable through the Intervals.icu API, so the coach can't see them. The skill includes a nutrition engine that writes daily calorie/macro targets to the Intervals.icu calendar automatically (as dated "Nutrition Target" notes).
 
-**This repo does NOT include the Intervals.icu MCP server.** It relies on a fork of [mvilanova/intervals-mcp-server](https://github.com/mvilanova/intervals-mcp-server) that adds four write tools the coach needs (`update_wellness`, `update_sport_settings`, `add_nutrition_targets`, and a `category` argument on `add_or_update_event` for RACE_A/B/C events). Use that fork; the stock server is read-mostly and the coach will lose metric-logging, threshold updates, race events, and nutrition-to-calendar without it.
+**The Intervals.icu MCP server is in this repo next to this folder (`../intervals-mcp-server`), and `../setup.ps1` / `../setup.sh` automate Steps 1–5 below.** It is a fork of [mvilanova/intervals-mcp-server](https://github.com/mvilanova/intervals-mcp-server) that adds four write tools the coach needs (`update_wellness`, `update_sport_settings`, `add_nutrition_targets`, and a `category` argument on `add_or_update_event` for RACE_A/B/C events). Use that fork; the stock server is read-mostly and the coach will lose metric-logging, threshold updates, race events, and nutrition-to-calendar without it.
 
 > **License note:** the MCP server is GPL-3.0. Running your own modified copy for personal use is unrestricted. If you *publish* your modified server, you must release the source under GPL-3.0. This skill is MIT.
 

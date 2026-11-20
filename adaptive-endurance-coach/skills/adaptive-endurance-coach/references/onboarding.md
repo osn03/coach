@@ -4,7 +4,7 @@ Run this only when no athlete profile exists at `~/.training/`. Do it conversati
 
 ## Step 1 — Confirm the Intervals.icu connection
 
-Intervals.icu is the single source of truth. It already ingests activities from Strava, Garmin, Wahoo, etc. via the athlete's own device sync, so there is no separate Strava connector to set up — completed activities and candid titles/notes arrive automatically.
+Intervals.icu is the single source of truth. It ingests activities and wellness (HRV, resting HR, sleep, weight) directly from the athlete's devices — Garmin, Wahoo, Coros, Suunto, Polar, Zwift, Oura, Whoop, etc. Strava-imported activities are NOT readable through the Intervals.icu API (Strava's API terms) — they come back as empty stubs: if recent activities have no data ("STRAVA activities are not available via the API"), have the athlete connect their device platform to Intervals.icu directly before you rely on activity data.
 
 - Verify the MCP connection with a cheap read — call `get_wellness_data` (or `get_events`). If it returns data, you're connected; confirm and move on.
 - If it errors with an auth/credential message, the Intervals.icu MCP server needs its API key + athlete ID configured in its `.env` (`API_KEY`, `ATHLETE_ID`). Point the athlete to the server's setup notes; do not proceed to coaching until a read succeeds. Never ask them to paste the API key into chat.
